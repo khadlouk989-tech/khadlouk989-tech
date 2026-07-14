@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartGym</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="gym.nador.css">
+<script src="gym.nador.js" defer></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo" onclick="showPage('accueil')">
+    <div class="logo-icon">⚡</div>
+    <span class="logo-text">Smart<span>Gym</span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('accueil')" class="active" id="nav-accueil">Accueil</a></li>
+    <li><a onclick="showPage('activites')" id="nav-activites">Activités</a></li>
+    <li><a onclick="showPage('coachs')" id="nav-coachs">Coachs</a></li>
+    <li><a onclick="showPage('planning')" id="nav-planning">Planning</a></li>
+    <li><a onclick="showPage('abonnements')" id="nav-abonnements">Abonnements</a></li>
+    <li><a onclick="showPage('galerie')" id="nav-galerie">Galerie</a></li>
+    <li><a onclick="showPage('temoignages')" id="nav-temoignages">Témoignages</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <button class="btn-nav" onclick="showPage('abonnements')">Commencer</button>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+</nav>
+
+<!-- ===== PAGE: ACCUEIL ===== -->
+<div class="page active" id="page-accueil">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-blob1"></div>
+    <div class="hero-blob2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label"><span>La salle d'élite à Paris</span></div>
+        <h1 class="hero-title bebas">
+          FORGE<br>TON<br>
+          <span class="hero-word" id="heroWord">DESTIN</span>
+        </h1>
+        <p class="hero-desc">Rejoignez la communauté SmartGym. Coachs certifiés, équipements premium et programmes sur mesure pour atteindre vos objectifs.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('abonnements')">Commencer maintenant →</button>
+          <button class="btn-outline" onclick="showPage('planning')">▶ Voir les cours</button>
+        </div>
+        <div class="hero-social-proof">
+          <div class="avatars">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=a1&backgroundColor=E8FF00" alt="">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=a2&backgroundColor=FF3B30" alt="">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=a3&backgroundColor=FF6B00" alt="">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=a4&backgroundColor=9B59B6" alt="">
+          </div>
+          <div class="proof-text"><p>2 500+ membres</p><span>nous font confiance</span></div>
+          <div class="proof-divider"></div>
+          <div class="proof-rating"><p>★ 4.9/5</p><span>note moyenne</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="SmartGym">
+          <div class="hero-float-card">
+            <div><p>Prochain cours</p><h4>CrossFit — 18h00</h4></div>
+            <button class="btn-book" onclick="showPage('planning')">Réserver</button>
+          </div>
+        </div>
+        <div class="hero-stat" style="top:-16px;right:-16px"><p class="bebas" style="color:#E8FF00">50+</p><span style="font-size:11px;color:#555">cours/sem</span></div>
+        <div class="hero-stat" style="top:38%;left:-16px"><p class="bebas" style="color:#FF3B30">15+</p><span style="font-size:11px;color:#555">coachs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item"><p>2 500+</p><p>Membres actifs</p></div>
+      <div class="stat-item"><p>15+</p><p>Coachs certifiés</p></div>
+      <div class="stat-item"><p>50+</p><p>Cours par semaine</p></div>
+      <div class="stat-item"><p>8 ans</p><p>D'expérience</p></div>
+    </div>
+  </div>
+
+  <!-- ACTIVITÉS PREVIEW -->
+  <section style="background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Ce qu'on propose</p>
+        <h2 class="section-title">NOS ACTIVITÉS</h2>
+        <p class="section-sub">Des disciplines variées pour tous les niveaux et tous les objectifs</p>
+      </div>
+      <div class="grid-3" id="homeActivities"></div>
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn-outline" onclick="showPage('activites')">Voir toutes les activités →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACHES PREVIEW -->
+  <section style="background:#070707">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Nos experts</p>
+        <h2 class="section-title">LES COACHS</h2>
+        <p class="section-sub">Des professionnels passionnés à votre service</p>
+      </div>
+      <div class="grid-4" id="homeCoaches"></div>
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn-outline" onclick="showPage('coachs')">Rencontrer l'équipe →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABONNEMENTS PREVIEW -->
+  <section style="background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Tarifs</p>
+        <h2 class="section-title">NOS FORMULES</h2>
+        <p class="section-sub">Des offres adaptées à chaque profil et chaque objectif</p>
+      </div>
+      <div id="homePlans"></div>
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn-outline" onclick="showPage('abonnements')">Comparer les formules →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS PREVIEW -->
+  <section style="background:#070707">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Ils nous font confiance</p>
+        <h2 class="section-title">TÉMOIGNAGES</h2>
+        <p class="section-sub">Des vraies transformations, des vraies histoires</p>
+      </div>
+      <div class="testi-grid" id="homeTesti"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="cta-inner">
+        <h2>PRÊT À <span>CHANGER</span> DE VIE ?</h2>
+        <p>Rejoignez SmartGym aujourd'hui et commencez votre transformation. Première séance offerte !</p>
+        <div class="cta-btns">
+          <button class="btn-primary" onclick="showPage('abonnements')">S'abonner maintenant →</button>
+          <button class="btn-outline" onclick="showPage('contact')">Nous contacter</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== PAGE: ACTIVITÉS ===== -->
+<div class="page" id="page-activites">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Disciplines</p>
+        <h2 class="section-title">NOS ACTIVITÉS</h2>
+        <p class="section-sub">6 disciplines, des coachs experts, des programmes pour tous les niveaux</p>
+      </div>
+      <div class="grid-3" id="allActivities"></div>
+    </div>
+  </section>
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="cta-inner">
+        <h2>TROUVE TON <span>ACTIVITÉ</span></h2>
+        <p>Essayez un cours gratuit avant de vous engager</p>
+        <div class="cta-btns">
+          <button class="btn-primary" onclick="showPage('planning')">Voir le planning →</button>
+          <button class="btn-outline" onclick="showPage('contact')">Séance découverte</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: COACHS ===== -->
+<div class="page" id="page-coachs">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Notre équipe</p>
+        <h2 class="section-title">LES COACHS</h2>
+        <p class="section-sub">Des professionnels certifiés, passionnés et dévoués à votre progression</p>
+      </div>
+      <div class="grid-3" id="allCoaches"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: PLANNING ===== -->
+<div class="page" id="page-planning">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head left">
+        <p class="section-label">Cours collectifs</p>
+        <h2 class="section-title">PLANNING</h2>
+        <p class="section-sub">Réservez vos cours en ligne — Places limitées</p>
+      </div>
+      <div class="planning-tabs" id="dayTabs"></div>
+      <div class="schedule-grid" id="scheduleList"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: ABONNEMENTS ===== -->
+<div class="page" id="page-abonnements">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Tarifs</p>
+        <h2 class="section-title">ABONNEMENTS</h2>
+        <p class="section-sub">Des formules claires, sans engagement caché</p>
+      </div>
+      <div class="plan-billing-toggle">
+        <span class="billing-opt active" onclick="setBilling('monthly',this)">Mensuel</span>
+        <span class="billing-opt" onclick="setBilling('quarterly',this)">Trimestriel</span>
+        <span class="billing-opt" onclick="setBilling('annual',this)">Annuel <span class="save">-30%</span></span>
+      </div>
+      <div class="plans" id="plansContainer"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: GALERIE ===== -->
+<div class="page" id="page-galerie">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Photos</p>
+        <h2 class="section-title">GALERIE</h2>
+        <p class="section-sub">Découvrez nos installations, cours et l'ambiance SmartGym</p>
+      </div>
+      <div class="gallery-filter" id="galleryFilter"></div>
+      <div class="gallery-masonry" id="galleryGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: TÉMOIGNAGES ===== -->
+<div class="page" id="page-temoignages">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head">
+        <p class="section-label">Avis membres</p>
+        <h2 class="section-title">TÉMOIGNAGES</h2>
+        <p class="section-sub">Des vraies histoires, de vraies transformations</p>
+      </div>
+      <div class="testi-grid" id="allTesti"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<div class="page" id="page-contact">
+  <section style="padding-top:80px;background:#0A0A0A">
+    <div class="section-inner">
+      <div class="section-head left">
+        <p class="section-label">Nous joindre</p>
+        <h2 class="section-title">CONTACT</h2>
+        <p class="section-sub">Une question ? On vous répond sous 24h</p>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <div class="contact-info-card">
+            <h3>INFOS PRATIQUES</h3>
+            <p>Retrouvez-nous sur place ou contactez-nous en ligne</p>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📍</div>
+              <div class="contact-detail-text"><p>Adresse</p><span>15 Avenue du Sport, 75015 Paris</span></div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📞</div>
+              <div class="contact-detail-text"><p>Téléphone</p><a href="tel:+33123456789">+33 1 23 45 67 89</a></div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">✉️</div>
+              <div class="contact-detail-text"><p>Email</p><a href="mailto:contact@smartgym.fr">contact@smartgym.fr</a></div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <h3>HORAIRES</h3>
+            <p>Nos portes vous sont ouvertes</p>
+            <div class="hours-grid">
+              <div class="hour-row"><span>Lun – Ven</span><span>06h – 22h</span></div>
+              <div class="hour-row"><span>Samedi</span><span>08h – 20h</span></div>
+              <div class="hour-row"><span>Dimanche</span><span>09h – 18h</span></div>
+              <div class="hour-row"><span>Jours fériés</span><span>10h – 16h</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>ENVOYER UN MESSAGE</h3>
+          <p>Remplissez le formulaire et nous vous répondrons rapidement</p>
+          <div class="form-row">
+            <div class="form-group"><label>Prénom</label><input type="text" placeholder="Karim"></div>
+            <div class="form-group"><label>Nom</label><input type="text" placeholder="Rachid"></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+          <div class="form-group"><label>Sujet</label>
+            <select>
+              <option>Information abonnement</option>
+              <option>Réservation cours</option>
+              <option>Demande coaching</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Votre message..."></textarea></div>
+          <button class="form-submit" onclick="submitForm()">Envoyer le message →</button>
+          <div class="form-success" id="formSuccess">✅ Message envoyé ! Nous vous répondrons sous 24h.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#070707;border-top:1px solid #1E1E1E;padding:48px 24px 24px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:40px">
+      <div>
+        <div class="logo" style="margin-bottom:14px;display:inline-flex" onclick="showPage('accueil')">
+          <div class="logo-icon">⚡</div>
+          <span class="logo-text" style="margin-left:8px">Smart<span>Gym</span></span>
+        </div>
+        <p style="color:#888;font-size:13px;line-height:1.7;margin-bottom:20px">La salle de sport d'élite au service de votre performance. Coachs certifiés, équipements premium.</p>
+        <div style="display:flex;gap:10px">
+          <a href="#" style="width:36px;height:36px;background:#111;border:1px solid #1E1E1E;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:14px">📸</a>
+          <a href="#" style="width:36px;height:36px;background:#111;border:1px solid #1E1E1E;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:14px">👥</a>
+          <a href="#" style="width:36px;height:36px;background:#111;border:1px solid #1E1E1E;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:14px">▶</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:13px;font-weight:600;margin-bottom:16px">Navigation</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a onclick="showPage('accueil')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Accueil</a>
+          <a onclick="showPage('activites')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Activités</a>
+          <a onclick="showPage('coachs')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Coachs</a>
+          <a onclick="showPage('planning')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Planning</a>
+          <a onclick="showPage('abonnements')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Abonnements</a>
+          <a onclick="showPage('galerie')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Galerie</a>
+          <a onclick="showPage('contact')" style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:13px;font-weight:600;margin-bottom:16px">Activités</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Musculation</a>
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Cardio</a>
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">CrossFit</a>
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Yoga</a>
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Boxe & Combat</a>
+          <a style="color:#888;font-size:13px;text-decoration:none;cursor:pointer" onmouseover="this.style.color='#E8FF00'" onmouseout="this.style.color='#888'">Pilates</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:13px;font-weight:600;margin-bottom:16px">Newsletter</h4>
+        <p style="color:#888;font-size:13px;margin-bottom:14px">Recevez nos actualités et offres exclusives</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input type="email" placeholder="votre@email.com" style="background:#111;border:1px solid #1E1E1E;border-radius:50px;padding:10px 16px;color:#fff;font-size:13px;outline:none;width:100%">
+          <button class="btn-primary" style="justify-content:center;padding:10px">S'inscrire →</button>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1E1E1E;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <p style="color:#444;font-size:12px">© 2025 SmartGym. Tous droits réservés.</p>
+      <div style="display:flex;gap:24px">
+        <a href="#" style="color:#444;font-size:12px;text-decoration:none">Mentions légales</a>
+        <a href="#" style="color:#444;font-size:12px;text-decoration:none">CGV</a>
+        <a href="#" style="color:#444;font-size:12px;text-decoration:none">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const ACTIVITIES=[
+  {name:"Musculation",desc:"Développez force et masse avec nos équipements haut de gamme et coachs experts.",color:"#E8FF00",img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",level:"Tous niveaux",duration:"45-90 min",capacity:30},
+  {name:"Cardio",desc:"Brûlez des calories et améliorez votre endurance avec nos machines dernière génération.",color:"#FF3B30",img:"https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80",level:"Tous niveaux",duration:"20-60 min",capacity:25},
+  {name:"Yoga",desc:"Trouvez l'équilibre parfait entre corps et esprit avec nos instructeurs certifiés.",color:"#00C896",img:"https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",level:"Débutant–Avancé",duration:"60 min",capacity:15},
+  {name:"CrossFit",desc:"Poussez vos limites avec nos sessions intenses et variées adaptées à tous.",color:"#FF6B00",img:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80",level:"Intermédiaire",duration:"60 min",capacity:12},
+  {name:"Boxe & Combat",desc:"Apprenez les techniques de boxe dans une ambiance dynamique et motivante.",color:"#9B59B6",img:"https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80",level:"Tous niveaux",duration:"60 min",capacity:20},
+  {name:"Pilates",desc:"Renforcez votre cœur musculaire et améliorez votre posture avec la méthode Pilates.",color:"#00B4D8",img:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",level:"Débutant",duration:"55 min",capacity:12}
+];
+
+const COACHES=[
+  {name:"Karim Benzali",role:"Coach Musculation & Force",specs:["Musculation","Powerlifting","Nutrition"],exp:"10 ans",rating:4.9,reviews:128,sessions:850,seed:"karim",bg:"E8FF00"},
+  {name:"Sofia Mendez",role:"Coach Yoga & Bien-être",specs:["Yoga","Méditation","Pilates"],exp:"8 ans",rating:5.0,reviews:96,sessions:620,seed:"sofia",bg:"FF3B30"},
+  {name:"Alexandre Dubois",role:"Coach CrossFit & HIIT",specs:["CrossFit","HIIT","Cardio"],exp:"7 ans",rating:4.8,reviews:112,sessions:700,seed:"alex",bg:"FF6B00"},
+  {name:"Nadia Ouali",role:"Coach Boxe & Arts Martiaux",specs:["Boxe","Muay Thaï","Self-défense"],exp:"12 ans",rating:4.9,reviews:87,sessions:930,seed:"nadia",bg:"9B59B6"},
+  {name:"Thomas Leroy",role:"Coach Cardio & Running",specs:["Cardio","Running","Triathlon"],exp:"6 ans",rating:4.7,reviews:74,sessions:510,seed:"thomas",bg:"00C896"},
+  {name:"Emma Fontaine",role:"Coach Pilates & Rééducation",specs:["Pilates","Rééducation","Stretching"],exp:"9 ans",rating:4.9,reviews:103,sessions:780,seed:"emma",bg:"00B4D8"}
+];
+
+const SCHEDULE={
+  "Lundi":[
+    {time:"07:00",dur:60,activity:"Musculation",coach:"Karim Benzali",spots:30,booked:18,level:"Tous niveaux",color:"#E8FF00"},
+    {time:"09:00",dur:55,activity:"Yoga",coach:"Sofia Mendez",spots:15,booked:12,level:"Débutant",color:"#00C896"},
+    {time:"12:00",dur:45,activity:"HIIT",coach:"Alexandre Dubois",spots:20,booked:20,level:"Intermédiaire",color:"#FF6B00"},
+    {time:"18:00",dur:60,activity:"CrossFit",coach:"Alexandre Dubois",spots:12,booked:10,level:"Avancé",color:"#FF6B00"},
+    {time:"19:30",dur:60,activity:"Boxe",coach:"Nadia Ouali",spots:20,booked:15,level:"Tous niveaux",color:"#9B59B6"}
+  ],
+  "Mardi":[
+    {time:"07:00",dur:60,activity:"Cardio",coach:"Thomas Leroy",spots:25,booked:14,level:"Tous niveaux",color:"#FF3B30"},
+    {time:"10:00",dur:55,activity:"Pilates",coach:"Emma Fontaine",spots:12,booked:9,level:"Débutant",color:"#00B4D8"},
+    {time:"18:30",dur:60,activity:"Musculation",coach:"Karim Benzali",spots:30,booked:25,level:"Intermédiaire",color:"#E8FF00"},
+    {time:"20:00",dur:45,activity:"HIIT",coach:"Alexandre Dubois",spots:20,booked:18,level:"Avancé",color:"#FF6B00"}
+  ],
+  "Mercredi":[
+    {time:"08:00",dur:60,activity:"Yoga",coach:"Sofia Mendez",spots:15,booked:11,level:"Tous niveaux",color:"#00C896"},
+    {time:"10:30",dur:60,activity:"CrossFit",coach:"Alexandre Dubois",spots:12,booked:12,level:"Intermédiaire",color:"#FF6B00"},
+    {time:"12:00",dur:45,activity:"Cardio",coach:"Thomas Leroy",spots:25,booked:10,level:"Tous niveaux",color:"#FF3B30"},
+    {time:"18:00",dur:60,activity:"Boxe",coach:"Nadia Ouali",spots:20,booked:16,level:"Tous niveaux",color:"#9B59B6"},
+    {time:"19:30",dur:55,activity:"Pilates",coach:"Emma Fontaine",spots:12,booked:8,level:"Débutant",color:"#00B4D8"}
+  ],
+  "Jeudi":[
+    {time:"07:00",dur:60,activity:"Musculation",coach:"Karim Benzali",spots:30,booked:22,level:"Tous niveaux",color:"#E8FF00"},
+    {time:"09:30",dur:55,activity:"Yoga",coach:"Sofia Mendez",spots:15,booked:13,level:"Avancé",color:"#00C896"},
+    {time:"18:30",dur:60,activity:"HIIT",coach:"Alexandre Dubois",spots:20,booked:20,level:"Intermédiaire",color:"#FF6B00"},
+    {time:"20:00",dur:60,activity:"Cardio",coach:"Thomas Leroy",spots:25,booked:12,level:"Tous niveaux",color:"#FF3B30"}
+  ],
+  "Vendredi":[
+    {time:"07:00",dur:60,activity:"CrossFit",coach:"Alexandre Dubois",spots:12,booked:11,level:"Avancé",color:"#FF6B00"},
+    {time:"10:00",dur:60,activity:"Boxe",coach:"Nadia Ouali",spots:20,booked:7,level:"Débutant",color:"#9B59B6"},
+    {time:"12:00",dur:55,activity:"Pilates",coach:"Emma Fontaine",spots:12,booked:10,level:"Tous niveaux",color:"#00B4D8"},
+    {time:"18:00",dur:60,activity:"Musculation",coach:"Karim Benzali",spots:30,booked:28,level:"Tous niveaux",color:"#E8FF00"},
+    {time:"19:30",dur:45,activity:"Yoga",coach:"Sofia Mendez",spots:15,booked:14,level:"Intermédiaire",color:"#00C896"}
+  ],
+  "Samedi":[
+    {time:"09:00",dur:90,activity:"CrossFit",coach:"Alexandre Dubois",spots:15,booked:15,level:"Tous niveaux",color:"#FF6B00"},
+    {time:"10:00",dur:60,activity:"Yoga",coach:"Sofia Mendez",spots:20,booked:17,level:"Débutant",color:"#00C896"},
+    {time:"11:30",dur:60,activity:"Boxe",coach:"Nadia Ouali",spots:20,booked:13,level:"Intermédiaire",color:"#9B59B6"},
+    {time:"14:00",dur:60,activity:"Musculation",coach:"Karim Benzali",spots:30,booked:19,level:"Tous niveaux",color:"#E8FF00"}
+  ],
+  "Dimanche":[
+    {time:"09:00",dur:60,activity:"Yoga",coach:"Sofia Mendez",spots:20,booked:15,level:"Tous niveaux",color:"#00C896"},
+    {time:"10:30",dur:60,activity:"Cardio",coach:"Thomas Leroy",spots:25,booked:8,level:"Tous niveaux",color:"#FF3B30"},
+    {time:"15:00",dur:45,activity:"Pilates",coach:"Emma Fontaine",spots:12,booked:6,level:"Débutant",color:"#00B4D8"}
+  ]
+};
+
+const PLANS=[
+  {name:"Starter",color:"#888",popular:false,desc:"L'essentiel pour débuter",prices:{monthly:29,quarterly:25,annual:19},
+   features:["Salle de musculation","Zone cardio","Vestiaires & douches","Cours collectifs (2/sem)"],noFeatures:["Bilan fitness","Coach personnel","Accès 24h/24","Nutrition coaching"]},
+  {name:"Pro",color:"#E8FF00",popular:true,desc:"Le plus choisi — progressez vite",prices:{monthly:49,quarterly:42,annual:35},
+   features:["Salle de musculation","Zone cardio","Vestiaires & douches","Cours illimités","Bilan fitness","2 séances coach/mois"],noFeatures:["Accès 24h/24","Nutrition coaching"]},
+  {name:"Elite",color:"#FF3B30",popular:false,desc:"L'expérience ultime",prices:{monthly:89,quarterly:79,annual:65},
+   features:["Salle de musculation","Zone cardio","Vestiaires premium","Cours illimités","Bilan mensuel","Coach personnel dédié","Accès 24h/24","Nutrition coaching complet"],noFeatures:[]}
+];
+
+const TESTIMONIALS=[
+  {name:"Mehdi Rachid",role:"Membre 2 ans",seed:"mehdi",bg:"E8FF00",rating:5,text:"SmartGym a complètement transformé mon rapport au sport. Les coachs sont exceptionnels et l'ambiance est vraiment motivante. J'ai perdu 15kg en 6 mois !",result:"-15 kg en 6 mois",activity:"Musculation + Cardio"},
+  {name:"Léa Moreau",role:"Membre 1 an",seed:"lea",bg:"FF3B30",rating:5,text:"Le yoga avec Sofia est une expérience unique. Elle adapte parfaitement les séances à chaque niveau. Je me sens tellement plus zen et flexible.",result:"Flexibilité +200%",activity:"Yoga & Pilates"},
+  {name:"Samir Benali",role:"Membre 3 ans",seed:"samir",bg:"FF6B00",rating:5,text:"Le CrossFit avec Alexandre est intense mais tellement efficace ! J'ai développé une forme physique que je n'aurais jamais cru possible.",result:"PR soulevé : 120kg",activity:"CrossFit"},
+  {name:"Amina Khadri",role:"Membre 8 mois",seed:"amina",bg:"00C896",rating:5,text:"J'ai commencé la boxe par curiosité et je suis complètement accro ! Nadia est une coach exceptionnelle, patiente et motivante.",result:"5 compétitions",activity:"Boxe & Combat"},
+  {name:"Pierre Garnier",role:"Membre 6 mois",seed:"pierre",bg:"9B59B6",rating:4,text:"Les équipements sont top, toujours bien entretenus. Le staff est professionnel et accueillant. L'abonnement Pro vaut vraiment son prix.",result:"+8kg de muscle",activity:"Musculation"},
+  {name:"Fatima Zahra",role:"Membre 1 an",seed:"fatima",bg:"00B4D8",rating:5,text:"Le Pilates avec Emma a résolu mes problèmes de dos chroniques. Un investissement pour ma santé qui me rapporte au quotidien.",result:"Dos guéri en 3 mois",activity:"Pilates & Rééducation"}
+];
+
+const GALLERY=[
+  {src:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80",alt:"Salle musculation",cat:"Équipements"},
+  {src:"https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&q=80",alt:"Zone cardio",cat:"Équipements"},
+  {src:"https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80",alt:"Cours yoga",cat:"Cours"},
+  {src:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&q=80",alt:"Session CrossFit",cat:"Cours"},
+  {src:"https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=500&q=80",alt:"Ring boxe",cat:"Équipements"},
+  {src:"https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&q=80",alt:"Studio Pilates",cat:"Cours"},
+  {src:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=700&q=80",alt:"Coach et membre",cat:"Coaching"},
+  {src:"https://images.unsplash.com/photo-1581009137042-c552e485697a?w=500&q=80",alt:"Vestiaires",cat:"Infrastructures"},
+  {src:"https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=500&q=80",alt:"Vue générale",cat:"Infrastructures"},
+  {src:"https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=500&q=80",alt:"Entraînement",cat:"Coaching"},
+  {src:"https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&q=80",alt:"Musculation avancée",cat:"Équipements"},
+  {src:"https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=700&q=80",alt:"Succès membres",cat:"Coaching"}
+];
+
+// ===== STATE =====
+let currentBilling='monthly';
+let currentDay='Lundi';
+let currentGalFilter='Tous';
+let heroWordIdx=0;
+const heroWords=["DESTIN","PERFORMANCE","PUISSANCE","RÉSULTATS","EXCELLENCE"];
+
+// ===== RENDER FUNCTIONS =====
+function activityCard(a){
+  return `<div class="activity-card">
+    <div class="activity-img">
+      <img src="${a.img}" alt="${a.name}" loading="lazy">
+      <div class="activity-dot" style="background:${a.color}"></div>
+    </div>
+    <div class="activity-body">
+      <h3 class="activity-name" style="color:${a.color}">${a.name}</h3>
+      <p class="activity-desc">${a.desc}</p>
+      <div class="activity-meta">
+        <span class="meta-tag">⭐ ${a.level}</span>
+        <span class="meta-tag">⏱ ${a.duration}</span>
+        <span class="meta-tag">👥 ${a.capacity} max</span>
+      </div>
+    </div>
+    <div class="activity-bar" style="background:${a.color}"></div>
+  </div>`;
+}
+
+function coachCard(c){
+  const stars='★'.repeat(Math.floor(c.rating))+'☆'.repeat(5-Math.floor(c.rating));
+  return `<div class="coach-card">
+    <div class="coach-top">
+      <div class="coach-avatar" style="position:relative">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${c.seed}&backgroundColor=${c.bg}" alt="${c.name}">
+        <span class="coach-exp">${c.exp}</span>
+      </div>
+      <div class="coach-rating"><div class="stars">${c.rating} ★</div><small>${c.reviews} avis</small></div>
+    </div>
+    <div class="coach-name">${c.name}</div>
+    <div class="coach-role">${c.role}</div>
+    <div class="coach-tags">${c.specs.map(s=>`<span class="coach-tag">${s}</span>`).join('')}</div>
+    <div class="coach-footer">
+      <span class="sessions"><b>${c.sessions}</b> séances</span>
+      <button>Voir profil →</button>
+    </div>
+  </div>`;
+}
+
+function planCard(p,billing){
+  const price=p.prices[billing];
+  const colorLabel=p.popular?'#0A0A0A':'#fff';
+  return `<div class="plan-card${p.popular?' popular':''}">
+    ${p.popular?'<div class="plan-badge">⭐ Le plus populaire</div>':''}
+    <div class="plan-name" style="color:${p.color}">${p.name}</div>
+    <p class="plan-desc">${p.desc}</p>
+    <div class="plan-price">
+      <div><span class="price" style="color:${p.popular?'#E8FF00':'#fff'}">${price}€</span><span class="period">/mois</span></div>
+      ${billing!=='monthly'?`<div class="billing">Facturé ${billing==='quarterly'?'trimestriellement':'annuellement'}</div>`:''}
+    </div>
+    <ul class="plan-features">
+      ${p.features.map(f=>`<li class="yes"><span class="feat-icon yes">✓</span>${f}</li>`).join('')}
+      ${p.noFeatures.map(f=>`<li class="no"><span class="feat-icon no">✗</span>${f}</li>`).join('')}
+    </ul>
+    <button class="plan-btn ${p.popular?'primary-btn':'outline-btn'}" onclick="showPage('contact')">${p.popular?'Rejoindre Pro':'S\'abonner'}</button>
+  </div>`;
+}
+
+function testiCard(t){
+  const stars='★'.repeat(t.rating)+'☆'.repeat(5-t.rating);
+  return `<div class="testi-card">
+    <div class="quote-mark">"</div>
+    <p class="testi-text">${t.text}</p>
+    <div class="testi-result">${t.result}</div>
+    <div class="testi-activity">${t.activity}</div>
+    <div class="testi-author">
+      <div class="testi-author-info">
+        <div class="testi-avatar"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${t.seed}&backgroundColor=${t.bg}" alt="${t.name}"></div>
+        <div><h5>${t.name}</h5><p>${t.role}</p></div>
+      </div>
+      <div class="testi-stars">${stars}</div>
+    </div>
+  </div>`;
+}
+
+function scheduleItem(s){
+  const pct=s.booked/s.spots*100;
+  const full=s.booked>=s.spots;
+  const left=s.spots-s.booked;
+  return `<div class="schedule-item">
+    <div class="schedule-time">${s.time}<small>${s.dur} min</small></div>
+    <div class="schedule-info">
+      <h4>${s.activity}</h4>
+      <p>${s.coach}</p>
+      <div class="tags">
+        <span class="sched-tag" style="background:${s.color}20;color:${s.color}">${s.level}</span>
+      </div>
+    </div>
+    <div class="schedule-action">
+      <div class="spots-bar"><div class="spots-fill" style="width:${pct}%;background:${full?'#FF3B30':s.color}"></div></div>
+      <div class="spots-text">${full?'Complet':left+' places'}</div>
+      <button style="margin-top:8px" class="${full?'btn-full':'btn-book'}" ${full?'disabled':''}>${full?'Complet':'Réserver'}</button>
+    </div>
+  </div>`;
+}
+
+// ===== INIT RENDERS =====
+function renderHomeActivities(){
+  document.getElementById('homeActivities').innerHTML=ACTIVITIES.slice(0,3).map(activityCard).join('');
+}
+function renderAllActivities(){
+  document.getElementById('allActivities').innerHTML=ACTIVITIES.map(activityCard).join('');
+}
+function renderHomeCoaches(){
+  document.getElementById('homeCoaches').innerHTML=COACHES.slice(0,4).map(coachCard).join('');
+}
+function renderAllCoaches(){
+  document.getElementById('allCoaches').innerHTML=COACHES.map(coachCard).join('');
+}
+function renderHomePlans(){
+  document.getElementById('homePlans').innerHTML=`<div class="plans">${PLANS.map(p=>planCard(p,'monthly')).join('')}</div>`;
+}
+function renderPlans(){
+  document.getElementById('plansContainer').innerHTML=PLANS.map(p=>planCard(p,currentBilling)).join('');
+}
+function renderHomeTesti(){
+  document.getElementById('homeTesti').innerHTML=TESTIMONIALS.slice(0,3).map(testiCard).join('');
+}
+function renderAllTesti(){
+  document.getElementById('allTesti').innerHTML=TESTIMONIALS.map(testiCard).join('');
+}
+function renderDayTabs(){
+  const days=Object.keys(SCHEDULE);
+  document.getElementById('dayTabs').innerHTML=days.map(d=>`<button class="day-tab${d===currentDay?' active':''}" onclick="selectDay('${d}',this)">${d}</button>`).join('');
+}
+function renderSchedule(){
+  const items=SCHEDULE[currentDay]||[];
+  document.getElementById('scheduleList').innerHTML=items.map(scheduleItem).join('');
+}
+function renderGalleryFilter(){
+  const cats=['Tous','Équipements','Cours','Coaching','Infrastructures'];
+  document.getElementById('galleryFilter').innerHTML=cats.map(c=>`<button class="filter-btn${c===currentGalFilter?' active':''}" onclick="filterGallery('${c}',this)">${c}</button>`).join('');
+}
+function renderGallery(){
+  const items=currentGalFilter==='Tous'?GALLERY:GALLERY.filter(g=>g.cat===currentGalFilter);
+  document.getElementById('galleryGrid').innerHTML=items.map(g=>`
+    <div class="gallery-item">
+      <img src="${g.src}" alt="${g.alt}" loading="lazy">
+      <div class="overlay"><small>${g.cat}</small><span>${g.alt}</span></div>
+    </div>`).join('');
+}
+
+// ===== ACTIONS =====
+function setBilling(type,el){
+  currentBilling=type;
+  document.querySelectorAll('.billing-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  renderPlans();
+}
+function selectDay(day,el){
+  currentDay=day;
+  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderSchedule();
+}
+function filterGallery(cat,el){
+  currentGalFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderGallery();
+}
+function submitForm(){
+  document.getElementById('formSuccess').style.display='block';
+  setTimeout(()=>document.getElementById('formSuccess').style.display='none',4000);
+}
+function toggleMenu(){
+  const links=document.getElementById('navLinks');
+  if(links.style.display==='flex'){links.style.display='';} 
+  else{links.style.cssText='display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#0A0A0A;border-bottom:1px solid #1E1E1E;padding:16px;gap:4px;z-index:99';}
+}
+
+// ===== PAGE ROUTING =====
+function showPage(id){
+  const map={accueil:'accueil',activites:'activites',coachs:'coachs',planning:'planning',abonnements:'abonnements',galerie:'galerie',temoignages:'temoignages',contact:'contact'};
+  const realId=map[id]||id;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const el=document.getElementById('page-'+realId);
+  if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}
+  const navEl=document.getElementById('nav-'+realId);
+  if(navEl)navEl.classList.add('active');
+  window.scrollTo(0,0);
+  // Close mobile menu
+  document.getElementById('navLinks').style.cssText='';
+  // Lazy render
+  if(realId==='activites')renderAllActivities();
+  if(realId==='coachs')renderAllCoaches();
+  if(realId==='planning'){renderDayTabs();renderSchedule();}
+  if(realId==='abonnements')renderPlans();
+  if(realId==='galerie'){renderGalleryFilter();renderGallery();}
+  if(realId==='temoignages')renderAllTesti();
+}
+
+// ===== HERO WORD ANIMATION =====
+function animateHeroWord(){
+  const el=document.getElementById('heroWord');
+  if(!el)return;
+  el.classList.add('fade');
+  setTimeout(()=>{
+    heroWordIdx=(heroWordIdx+1)%heroWords.length;
+    el.textContent=heroWords[heroWordIdx];
+    el.classList.remove('fade');
+  },400);
+}
+
+// ===== INIT =====
+renderHomeActivities();
+renderHomeCoaches();
+renderHomePlans();
+renderHomeTesti();
+setInterval(animateHeroWord,2500);
+</script>
+</body>
+</html>
