@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  users       User[]
+  permissions Permission[]
+}
+
+model Permission {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  roleId      Int
+  role        Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String        @unique
+  password     String
+  phone        String?
+  birthDate    DateTime?
+  gender       String?
+  address      String?
+  photo        String?
+  status       String        @default("active")
+  roleId       Int
+  role         Role          @relation(fields: [roleId], references: [id])
+  member       Member?
+  coach        Coach?
+  subscriptions Subscription[]
+  payments     Payment[]
+  reservations Reservation[]
+  testimonials Testimonial[]
+  news         News[]
+  contacts     Contact[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Member {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  history   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Coach {
+  id           Int         @id @default(autoincrement())
+  userId       Int         @unique
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  specialty    String
+  description  String?
+  experience   String?
+  socialLinks  Json?
+  availability String?
+  activities   Activity[]
+  courses      Course[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Activity {
+  id              Int       @id @default(autoincrement())
+  name            String
+  description     String
+  image           String?
+  durationMinutes Int
+  coachId         Int?
+  coach           Coach?    @relation(fields: [coachId], references: [id], onDelete: SetNull)
+  capacity        Int
+  courses         Course[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Course {
+  id           Int          @id @default(autoincrement())
+  name         String
+  coachId      Int
+  coach        Coach        @relation(fields: [coachId], references: [id], onDelete: Cascade)
+  activityId   Int?
+  activity     Activity?    @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  date         DateTime
+  duration     Int
+  room         String
+  availableSpots Int
+  participants Reservation[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Subscription {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  price        Float
+  durationDays Int
+  benefits     String
+  status       String    @default("active")
+  startDate    DateTime
+  endDate      DateTime
+  autoRenew    Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Payment {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount      Float
+  method      String
+  date        DateTime
+  status      String
+  reference   String    @unique
+  history     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Reservation {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    Int
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  status      String    @default("reserved")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Gallery {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  image       String
+  category    String
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model News {
+  id          Int       @id @default(autoincrement())
+  title       String
+  body        String
+  image       String?
+  authorId    Int
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  publishedAt DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Testimonial {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content     String
+  status      String    @default("pending")
+  approvedBy  Int?
+  approvedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Contact {
+  id          Int       @id @default(autoincrement())
+  userId      Int?
+  user        User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  email       String
+  subject     String
+  message     String
+  createdAt   DateTime  @default(now())
+}
